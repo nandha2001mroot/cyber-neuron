@@ -16,7 +16,7 @@ The site serves as a structured reference and visual exploration of the vast cyb
 
 ## 🌐 Live Demo
 
-View the site live using GitHub Pages: [https://your-github-username.github.io/cyber-neuron-network/](https://your-github-username.github.io/cyber-neuron-network/) (Replace `your-github-username` with your actual GitHub username after publishing).
+View the site live using GitHub Pages: [https://your-github-username.github.io/cyber-neuron-network/](https://nandha2001mroot.github.io/cyber-neuron/) (Replace `your-github-username` with your actual GitHub username after publishing).
 
 ## 📁 Contents
 
