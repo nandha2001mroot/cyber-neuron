@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Neuron Network: 50 Domains RAG Spiral</title>
+    <style>
+        /* Modern Cyber Matrix Theme with Neural Network */
+        :root {
+            --matrix-bg: #0a0a0a; /* Dark Matrix background */
+            --matrix-text: #0f0; /* Matrix Green */
+            --matrix-accent: #00f; /* Blue highlight */
+            --matrix-accent2: #f00; /* Red accent */
+            --matrix-card-bg: rgba(0, 20, 0, 0.7); /* Slightly transparent card background */
+            --matrix-border: var(--matrix-text);
+            --matrix-hover: rgba(0, 255, 0, 0.1); /* Green glow on hover */
+            --matrix-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+            --matrix-shadow-hover: 0 0 20px rgba(0, 255, 0, 0.2);
+            --neural-bg: linear-gradient(135deg, #000428, #004e92); /* Deep blue gradient for neural network */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--matrix-bg);
+            color: var(--matrix-text);
+            line-height: 1.6;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px; /* Matrix grid pattern */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 2px solid var(--matrix-border);
+            margin-bottom: 30px;
+            position: relative;
+            background-color: rgba(0, 10, 0, 0.8); /* Slight overlay */
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            color: var(--matrix-accent);
+            text-shadow: 0 0 10px var(--matrix-accent), 0 0 20px var(--matrix-accent);
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: var(--matrix-text);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .linkedin-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: var(--matrix-accent2);
+            color: var(--matrix-bg);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+        }
+
+        .linkedin-link:hover {
+            background-color: var(--matrix-text);
+            color: var(--matrix-bg);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        .overview {
+            background-color: var(--matrix-card-bg);
+            padding: 25px;
+            border: 1px solid var(--matrix-border);
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: var(--matrix-shadow);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .overview:hover {
+            box-shadow: var(--matrix-shadow-hover);
+        }
+
+        .overview h2 {
+            color: var(--matrix-accent);
+            border-bottom: 1px solid var(--matrix-border);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .overview p {
+            font-size: 1.1em;
+            color: #ccc;
+        }
+
+        .domain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Responsive grid */
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .domain-card {
+            background: var(--neural-bg); /* Neural network background */
+            border: 1px solid var(--matrix-border);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            box-shadow: var(--matrix-shadow);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .domain-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .domain-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgo8cGF0aCBkPSJNIDAgMCBMIDEwMCAxMDAgTSAwIDEwMCBMIDEwMCAwIiBzdHJva2Utd2lkdGg9IjAuNSIgc3Ryb2tlPSJocmVmKCNmaWxsKSIgZmlsbD0ibm9uZSIgLz4KPC9zdmc+');
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .domain-card:hover {
+            background: linear-gradient(135deg, #000428, #004e92);
+            transform: translateY(-8px);
+            box-shadow: var(--matrix-shadow-hover);
+        }
+
+        .domain-card:hover::before {
+            opacity: 0.5;
+        }
+
+        .domain-card h3 {
+            color: var(--matrix-accent);
+            margin-top: 0;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+            padding-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .domain-concept {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #aaa;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .knowledge-source {
+            font-size: 0.95em;
+            color: #999; /* Slightly dimmer for source text */
+            position: relative;
+            z-index: 1;
+        }
+
+        .knowledge-source a {
+            color: var(--matrix-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .knowledge-source a:hover {
+            color: var(--matrix-accent2);
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid var(--matrix-border);
+            color: #aaa;
+            font-size: 1em;
+            margin-top: auto; /* Push footer to bottom */
+            background-color: rgba(0, 10, 0, 0.8); /* Slight overlay */
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        /* Animations for matrix effect */
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        body {
+            animation: flicker 8s infinite alternate;
+        }
+
+        /* Neural Network Visual Effect */
+        .neural-node {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            box-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+            animation: pulse 2s infinite alternate;
+            z-index: 2;
+        }
+
+        .neural-line {
+            position: absolute;
+            background: linear-gradient(to right, #00ffff, #ff00ff);
+            height: 1px;
+            transform-origin: left;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .header p {
+                font-size: 1.1em;
+            }
+            .overview h2 {
+                font-size: 1.5em;
+            }
+            .domain-grid {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🛡️ Cyber Neuron Network</h1>
+        <p>RAG Neuron Spiral: 50 Domains of Cybersecurity</p>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/nandha-kumar-m-952342159/" target="_blank">🔗 Connect with the Knowledge Source</a>
+    </div>
+
+    <div class="container">
+        <div class="overview">
+            <h2>🧠 RAG Neuron Spiral Core</h2>
+            <p>This conceptual model structures the 50 cybersecurity domains within a spiral neuron network. Each domain (Neuron Node) contains its core concept and links to relevant Knowledge Sources (Synapses). The spiral implies continuous learning and interconnectedness, while the RAG aspect suggests retrieving and augmenting knowledge from these sources for deeper understanding.</p>
+        </div>
+
+        <div class="domain-grid">
+            <!-- Domain 1 -->
+            <div class="domain-card">
+                <h3>1. Network Security (NS)</h3>
+                <p class="domain-concept">Protecting network infrastructure and data flows.</p>
+                <p class="knowledge-source">LinkedIn: Dorks, Wordlists, <a href="https://www.nist.gov/publications/guidelines-firewall-vpn-security-configuration-and-architecture" target="_blank">NIST SP 800-41</a>, <a href="https://www.sans.org/" target="_blank">SANS Reading Room</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 10%;"></div>
+                <div class="neural-node" style="top: 30%; right: 10%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 20%;"></div>
+                <div class="neural-line" style="top: 15%; left: 15%; width: 30%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 35%; right: 15%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 2 -->
+            <div class="domain-card">
+                <h3>2. Application Security (AppSec)</h3>
+                <p class="domain-concept">Securing applications throughout their lifecycle.</p>
+                <p class="knowledge-source">LinkedIn: Secure Coding, <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top 10</a>, <a href="https://www.sans.org/cyber-security-courses/securing-web-applications/" target="_blank">SANS Securing Web Apps</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 15%;"></div>
+                <div class="neural-node" style="top: 50%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 30%;"></div>
+                <div class="neural-line" style="top: 25%; left: 20%; width: 25%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 55%; right: 25%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 3 -->
+            <div class="domain-card">
+                <h3>3. Cloud Security</h3>
+                <p class="domain-concept">Securing data, applications, and infrastructure in cloud environments.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-144/final" target="_blank">NIST SP 800-144</a>, <a href="https://cloudsecurityalliance.org/" target="_blank">CSA Guidance</a>, Cloud Provider Docs</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 20%;"></div>
+                <div class="neural-node" style="top: 40%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 25%;"></div>
+                <div class="neural-line" style="top: 20%; left: 25%; width: 30%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 20%; width: 25%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 4 -->
+            <div class="domain-card">
+                <h3>4. Mobile Security</h3>
+                <p class="domain-concept">Protecting mobile devices and their applications.</p>
+                <p class="knowledge-source">LinkedIn: <a href="https://lnkd.in/g5emYDK2" target="_blank">APK Tool GUI</a>, <a href="https://github.com/OWASP/owasp-mstg" target="_blank">OWASP MSTG</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 10%;"></div>
+                <div class="neural-node" style="top: 60%; right: 10%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 15%;"></div>
+                <div class="neural-line" style="top: 30%; left: 15%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 65%; right: 15%; width: 30%; transform: rotate(-20deg);"></div>
+            </div>
+            <!-- Domain 5 -->
+            <div class="domain-card">
+                <h3>5. Cryptography</h3>
+                <p class="domain-concept">Techniques for secure communication and data protection.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines" target="_blank">NIST Publications</a>, Cryptography Books</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 25%;"></div>
+                <div class="neural-node" style="top: 35%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 35%;"></div>
+                <div class="neural-line" style="top: 15%; left: 30%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 40%; right: 30%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 6 -->
+            <div class="domain-card">
+                <h3>6. Data Loss Prevention (DLP)</h3>
+                <p class="domain-concept">Preventing unauthorized access and transmission of sensitive data.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-125a/final" target="_blank">NIST SP 800-125A</a>, Vendor Guides</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 20%;"></div>
+                <div class="neural-node" style="top: 55%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 30%;"></div>
+                <div class="neural-line" style="top: 25%; left: 25%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 60%; right: 25%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 7 -->
+            <div class="domain-card">
+                <h3>7. Identity & Access Management (IAM)</h3>
+                <p class="domain-concept">Managing digital identities and controlling access to resources.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-63b/final" target="_blank">NIST SP 800-63B/C</a>, <a href="https://www.sans.org/" target="_blank">SANS IAM Resources</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 15%;"></div>
+                <div class="neural-node" style="top: 45%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 25%;"></div>
+                <div class="neural-line" style="top: 20%; left: 20%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 50%; right: 20%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 8 -->
+            <div class="domain-card">
+                <h3>8. Endpoint Security</h3>
+                <p class="domain-concept">Securing endpoints like laptops, desktops, and mobile devices.</p>
+                <p class="knowledge-source"><a href="https://attack.mitre.org/" target="_blank">MITRE ATT&CK</a>, EDR Solution Guides</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 10%;"></div>
+                <div class="neural-node" style="top: 65%; right: 10%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 20%;"></div>
+                <div class="neural-line" style="top: 30%; left: 15%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 70%; right: 15%; width: 35%; transform: rotate(-15deg);"></div>
+            </div>
+            <!-- Domain 9 -->
+            <div class="domain-card">
+                <h3>9. Incident Response (IR)</h3>
+                <p class="domain-concept">Coordinated efforts to address and manage the aftermath of a security incident.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/cyber-security-courses/incident-handlers-handbook/" target="_blank">SANS FOR508</a>, <a href="https://csrc.nist.gov/publications/detail/sp/800-61/final" target="_blank">NIST SP 800-61</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 30%;"></div>
+                <div class="neural-node" style="top: 40%; right: 30%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 40%;"></div>
+                <div class="neural-line" style="top: 15%; left: 35%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 35%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 10 -->
+            <div class="domain-card">
+                <h3>10. Threat Intelligence (TI)</h3>
+                <p class="domain-concept">Collecting and analyzing information about potential threats.</p>
+                <p class="knowledge-source">LinkedIn: <a href="https://lnkd.in/g4EsFmF6" target="_blank">Data Breach Search Engines</a>, <a href="https://www.misp-project.org/" target="_blank">MISP</a>, <a href="https://www.sans.org/cyber-security-courses/threat-hunting/" target="_blank">SANS FOR519</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 25%;"></div>
+                <div class="neural-node" style="top: 50%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 35%;"></div>
+                <div class="neural-line" style="top: 25%; left: 30%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 55%; right: 30%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 11 -->
+            <div class="domain-card">
+                <h3>11. Security Operations Center (SOC)</h3>
+                <p class="domain-concept">Centralized unit monitoring and analyzing security events.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/cyber-security-courses/security-operations-center/" target="_blank">SANS SEC511</a>, SOC Building Guides</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 20%;"></div>
+                <div class="neural-node" style="top: 35%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 30%;"></div>
+                <div class="neural-line" style="top: 20%; left: 25%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 40%; right: 25%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 12 -->
+            <div class="domain-card">
+                <h3>12. SIEM</h3>
+                <p class="domain-concept">Technology for real-time analysis of security events.</p>
+                <p class="knowledge-source">Vendor Docs (Splunk, QRadar), <a href="https://www.elastic.co/guide/index.html" target="_blank">ELK Stack Guides</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 15%;"></div>
+                <div class="neural-node" style="top: 60%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 25%;"></div>
+                <div class="neural-line" style="top: 30%; left: 20%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 65%; right: 20%; width: 35%; transform: rotate(-20deg);"></div>
+            </div>
+            <!-- Domain 13 -->
+            <div class="domain-card">
+                <h3>13. Penetration Testing (Pentesting)</h3>
+                <p class="domain-concept">Simulating attacks to find vulnerabilities.</p>
+                <p class="knowledge-source">LinkedIn: <a href="https://lnkd.in/g4EsFmF6" target="_blank">Proving Grounds Walkthrough</a>, <a href="https://www.sans.org/cyber-security-courses/penetration-testing-ethics/" target="_blank">SANS SEC560</a>, <a href="https://www.owasp.org/index.php/OWASP_Testing_Guide_v4_Table_of_Contents" target="_blank">OWASP Testing Guide</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 25%;"></div>
+                <div class="neural-node" style="top: 45%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 35%;"></div>
+                <div class="neural-line" style="top: 15%; left: 30%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 50%; right: 30%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 14 -->
+            <div class="domain-card">
+                <h3>14. Vulnerability Management</h3>
+                <p class="domain-concept">Process of identifying, classifying, and remediating vulnerabilities.</p>
+                <p class="knowledge-source">LinkedIn: <a href="https://lnkd.in/g4EsFmF6" target="_blank">VAPT Resources</a>, <a href="https://nvd.nist.gov/" target="_blank">NVD Database</a>, <a href="https://www.first.org/cvss/" target="_blank">CVSS Calculator</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 20%;"></div>
+                <div class="neural-node" style="top: 55%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 30%;"></div>
+                <div class="neural-line" style="top: 25%; left: 25%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 60%; right: 25%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 15 -->
+            <div class="domain-card">
+                <h3>15. Security Awareness Training</h3>
+                <p class="domain-concept">Educating users about security threats and best practices.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/security-awareness-training/" target="_blank">SANS Awareness</a>, KnowBe4 Blog</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 15%;"></div>
+                <div class="neural-node" style="top: 40%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 25%;"></div>
+                <div class="neural-line" style="top: 20%; left: 20%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 20%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 16 -->
+            <div class="domain-card">
+                <h3>16. Forensics Analysis</h3>
+                <p class="domain-concept">Investigating security incidents using digital evidence.</p>
+                <p class="knowledge-source">LinkedIn: Digital Forensics (implied), <a href="https://www.sans.org/cyber-security-courses/computer-forensics-and-incident-response-capstone/" target="_blank">SANS FOR508</a>, <a href="https://www.sans.org/cyber-security-courses/advanced-incident-response-threat-hunting-and-forensics/" target="_blank">SANS FOR572</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 10%;"></div>
+                <div class="neural-node" style="top: 65%; right: 10%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 20%;"></div>
+                <div class="neural-line" style="top: 30%; left: 15%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 70%; right: 15%; width: 35%; transform: rotate(-15deg);"></div>
+            </div>
+            <!-- Domain 17 -->
+            <div class="domain-card">
+                <h3>17. Secure Coding</h3>
+                <p class="domain-concept">Writing code that is resistant to common vulnerabilities.</p>
+                <p class="knowledge-source">LinkedIn: Secure Coding, <a href="https://owasp.org/www-project-application-security-verification-standard/" target="_blank">OWASP ASVS</a>, <a href="https://www.sans.org/cyber-security-courses/secure-coding-theory-and-practice/" target="_blank">SANS SEC522</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 30%;"></div>
+                <div class="neural-node" style="top: 40%; right: 30%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 40%;"></div>
+                <div class="neural-line" style="top: 15%; left: 35%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 35%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 18 -->
+            <div class="domain-card">
+                <h3>18. Web Security</h3>
+                <p class="domain-concept">Protecting websites and web applications.</p>
+                <p class="knowledge-source">LinkedIn: <a href="https://lnkd.in/g4EsFmF6" target="_blank">SSTI Walkthrough</a>, <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top 10</a>, <a href="https://portswigger.net/web-security" target="_blank">PortSwigger Web Academy</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 25%;"></div>
+                <div class="neural-node" style="top: 50%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 35%;"></div>
+                <div class="neural-line" style="top: 25%; left: 30%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 55%; right: 30%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 19 -->
+            <div class="domain-card">
+                <h3>19. Wireless Security</h3>
+                <p class="domain-concept">Securing wireless networks and devices.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/cyber-security-courses/wireless-ethernet-security/" target="_blank">SANS SEC573</a>, Wireless Standards, Aircrack-ng Tutorials</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 20%;"></div>
+                <div class="neural-node" style="top: 35%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 30%;"></div>
+                <div class="neural-line" style="top: 20%; left: 25%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 40%; right: 25%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 20 -->
+            <div class="domain-card">
+                <h3>20. Physical Security</h3>
+                <p class="domain-concept">Protecting physical assets and premises.</p>
+                <p class="knowledge-source"><a href="https://www.asisonline.org/" target="_blank">ASIS Standards</a>, Physical Security Guides</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 15%;"></div>
+                <div class="neural-node" style="top: 60%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 25%;"></div>
+                <div class="neural-line" style="top: 30%; left: 20%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 65%; right: 20%; width: 35%; transform: rotate(-20deg);"></div>
+            </div>
+            <!-- Domain 21 -->
+            <div class="domain-card">
+                <h3>21. Risk Management</h3>
+                <p class="domain-concept">Identifying, assessing, and prioritizing risks.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-30/final" target="_blank">NIST RMF</a>, ISO 27005, <a href="https://www.sans.org/cyber-security-courses/managing-vulnerabilities-in-the-enterprise/" target="_blank">SANS MGT414</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 25%;"></div>
+                <div class="neural-node" style="top: 45%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 35%;"></div>
+                <div class="neural-line" style="top: 15%; left: 30%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 50%; right: 30%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 22 -->
+            <div class="domain-card">
+                <h3>22. Compliance Management</h3>
+                <p class="domain-concept">Ensuring adherence to regulations and standards.</p>
+                <p class="knowledge-source"><a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank">ISO 27001</a>, <a href="https://www.nist.gov/cyberframework" target="_blank">NIST CSF</a>, PCI DSS Docs</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 20%;"></div>
+                <div class="neural-node" style="top: 55%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 30%;"></div>
+                <div class="neural-line" style="top: 25%; left: 25%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 60%; right: 25%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 23 -->
+            <div class="domain-card">
+                <h3>23. Governance, Risk & Compliance (GRC)</h3>
+                <p class="domain-concept">Integrated approach to governance, risk, and compliance.</p>
+                <p class="knowledge-source"><a href="https://www.nist.gov/cyberframework" target="_blank">NIST CSF</a>, ISO 27000 series, OECG Resources</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 15%;"></div>
+                <div class="neural-node" style="top: 40%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 25%;"></div>
+                <div class="neural-line" style="top: 20%; left: 20%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 20%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 24 -->
+            <div class="domain-card">
+                <h3>24. Security Architecture</h3>
+                <p class="domain-concept">Designing the overall security structure of an organization.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/cyber-security-courses/managing-vulnerabilities-in-the-enterprise/" target="_blank">SANS MGT516</a>, TOGAF Security Extensions</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 10%;"></div>
+                <div class="neural-node" style="top: 65%; right: 10%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 20%;"></div>
+                <div class="neural-line" style="top: 30%; left: 15%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 70%; right: 15%; width: 35%; transform: rotate(-15deg);"></div>
+            </div>
+            <!-- Domain 25 -->
+            <div class="domain-card">
+                <h3>25. Security Policy & Procedures</h3>
+                <p class="domain-concept">Formal documents outlining security rules and processes.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-18/final" target="_blank">NIST SP 800-18</a>, Policy Repositories</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 30%;"></div>
+                <div class="neural-node" style="top: 40%; right: 30%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 40%;"></div>
+                <div class="neural-line" style="top: 15%; left: 35%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 35%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 26 -->
+            <div class="domain-card">
+                <h3>26. Disaster Recovery (DR)</h3>
+                <p class="domain-concept">Procedures to restore IT systems after a disaster.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-34/final" target="_blank">NIST SP 800-34</a>, ISO 22301, DR Templates</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 25%;"></div>
+                <div class="neural-node" style="top: 50%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 35%;"></div>
+                <div class="neural-line" style="top: 25%; left: 30%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 55%; right: 30%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 27 -->
+            <div class="domain-card">
+                <h3>27. Business Continuity Planning (BCP)</h3>
+                <p class="domain-concept">Planning to ensure business functions continue during disruptions.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-34/final" target="_blank">NIST SP 800-34</a>, ISO 22301, BCP Methodologies</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 20%;"></div>
+                <div class="neural-node" style="top: 35%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 30%;"></div>
+                <div class="neural-line" style="top: 20%; left: 25%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 40%; right: 25%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 28 -->
+            <div class="domain-card">
+                <h3>28. Secure Development Lifecycle (SDL)</h3>
+                <p class="domain-concept">Integrating security practices into the software development process.</p>
+                <p class="knowledge-source">LinkedIn: Secure Coding, <a href="https://www.microsoft.com/en-us/securityengineering/sdl/" target="_blank">Microsoft SDL</a>, <a href="https://owasp.org/www-project-samm/" target="_blank">OWASP SAMM</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 15%;"></div>
+                <div class="neural-node" style="top: 60%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 25%;"></div>
+                <div class="neural-line" style="top: 30%; left: 20%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 65%; right: 20%; width: 35%; transform: rotate(-20deg);"></div>
+            </div>
+            <!-- Domain 29 -->
+            <div class="domain-card">
+                <h3>29. IDPS</h3>
+                <p class="domain-concept">Systems that detect and prevent malicious network activity.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/cyber-security-courses/intrusion-detection-in-depth/" target="_blank">SANS SEC555</a>, Snort Docs, Suricata Guides</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 25%;"></div>
+                <div class="neural-node" style="top: 45%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 35%;"></div>
+                <div class="neural-line" style="top: 15%; left: 30%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 50%; right: 30%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 30 -->
+            <div class="domain-card">
+                <h3>30. VPNs</h3>
+                <p class="domain-concept">Creating secure connections over public networks.</p>
+                <p class="knowledge-source"><a href="https://www.rfc-editor.org/" target="_blank">RFC Documentation</a>, VPN Protocol Guides, Vendor Configs</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 20%;"></div>
+                <div class="neural-node" style="top: 55%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 30%;"></div>
+                <div class="neural-line" style="top: 25%; left: 25%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 60%; right: 25%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 31 -->
+            <div class="domain-card">
+                <h3>31. SSL/TLS</h3>
+                <p class="domain-concept">Protocols for securing communication over networks.</p>
+                <p class="knowledge-source"><a href="https://www.rfc-editor.org/rfc/rfc8446" target="_blank">RFC 5246/8446</a>, SSL/TLS Config Guides, <a href="https://www.ssllabs.com/" target="_blank">SSL Labs Tools</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 15%;"></div>
+                <div class="neural-node" style="top: 40%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 25%;"></div>
+                <div class="neural-line" style="top: 20%; left: 20%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 20%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 32 -->
+            <div class="domain-card">
+                <h3>32. Multi-Factor Authentication (MFA)</h3>
+                <p class="domain-concept">Requiring multiple forms of verification for access.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-63b/final" target="_blank">NIST SP 800-63B</a>, MFA Implementation Guides</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 10%;"></div>
+                <div class="neural-node" style="top: 65%; right: 10%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 20%;"></div>
+                <div class="neural-line" style="top: 30%; left: 15%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 70%; right: 15%; width: 35%; transform: rotate(-15deg);"></div>
+            </div>
+            <!-- Domain 33 -->
+            <div class="domain-card">
+                <h3>33. Zero Trust Security Model</h3>
+                <p class="domain-concept">Security model based on "never trust, always verify."</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-207/final" target="_blank">NIST SP 800-207</a>, <a href="https://www.cisa.gov/zero-trust-maturity-model" target="_blank">CISA Guides</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 30%;"></div>
+                <div class="neural-node" style="top: 40%; right: 30%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 40%;"></div>
+                <div class="neural-line" style="top: 15%; left: 35%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 35%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 34 -->
+            <div class="domain-card">
+                <h3>34. Insider Threat Management</h3>
+                <p class="domain-concept">Mitigating risks posed by internal users.</p>
+                <p class="knowledge-source"><a href="https://insider-threat.cmu.edu/" target="_blank">CERT Insider Threat Reports</a>, SANS Insider Threat Resources</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 25%;"></div>
+                <div class="neural-node" style="top: 50%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 35%;"></div>
+                <div class="neural-line" style="top: 25%; left: 30%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 55%; right: 30%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 35 -->
+            <div class="domain-card">
+                <h3>35. Supply Chain Security</h3>
+                <p class="domain-concept">Securing the components and processes involved in delivering products/services.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-161/final" target="_blank">NIST SP 800-161</a>, SANS Supply Chain Resources</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 20%;"></div>
+                <div class="neural-node" style="top: 35%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 30%;"></div>
+                <div class="neural-line" style="top: 20%; left: 25%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 40%; right: 25%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 36 -->
+            <div class="domain-card">
+                <h3>36. ICS Security</h3>
+                <p class="domain-concept">Securing operational technology (OT) systems.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/cyber-security-courses/ics-cyber-security-essentials/" target="_blank">SANS ICS SEC511</a>, NISTIR 7628</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 15%;"></div>
+                <div class="neural-node" style="top: 60%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 25%;"></div>
+                <div class="neural-line" style="top: 30%; left: 20%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 65%; right: 20%; width: 35%; transform: rotate(-20deg);"></div>
+            </div>
+            <!-- Domain 37 -->
+            <div class="domain-card">
+                <h3>37. IoT Security</h3>
+                <p class="domain-concept">Securing connected devices and their ecosystems.</p>
+                <p class="knowledge-source"><a href="https://owasp.org/www-project-internet-of-things/" target="_blank">OWASP IoT Top 10</a>, NISTIR 8228, IoT Security Best Practices</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 25%;"></div>
+                <div class="neural-node" style="top: 45%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 35%;"></div>
+                <div class="neural-line" style="top: 15%; left: 30%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 50%; right: 30%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 38 -->
+            <div class="domain-card">
+                <h3>38. Data Privacy</h3>
+                <p class="domain-concept">Protecting personal data and ensuring privacy rights.</p>
+                <p class="knowledge-source"><a href="https://gdpr-info.eu/" target="_blank">GDPR</a>, <a href="https://oag.ca.gov/privacy/ccpa" target="_blank">CCPA</a>, <a href="https://www.nist.gov/privacy-framework" target="_blank">NIST Privacy Framework</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 20%;"></div>
+                <div class="neural-node" style="top: 55%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 30%;"></div>
+                <div class="neural-line" style="top: 25%; left: 25%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 60%; right: 25%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 39 -->
+            <div class="domain-card">
+                <h3>39. Digital Forensics</h3>
+                <p class="domain-concept">Applying scientific methods to collect and analyze digital evidence.</p>
+                <p class="knowledge-source">LinkedIn: Digital Forensics (implied), <a href="https://www.sans.org/cyber-security-courses/computer-forensics-and-incident-response-capstone/" target="_blank">SANS FOR508</a>, <a href="https://www.sans.org/cyber-security-courses/advanced-incident-response-threat-hunting-and-forensics/" target="_blank">SANS FOR572</a></p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 15%;"></div>
+                <div class="neural-node" style="top: 40%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 25%;"></div>
+                <div class="neural-line" style="top: 20%; left: 20%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 20%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 40 -->
+            <div class="domain-card">
+                <h3>40. Malware Analysis</h3>
+                <p class="domain-concept">Studying malicious software to understand its behavior.</p>
+                <p class="knowledge-source">LinkedIn: Malware Analysis (implied), <a href="https://www.sans.org/cyber-security-courses/malware-analysis-foundations/" target="_blank">SANS FOR518</a>, Malware Analysis Books</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 10%;"></div>
+                <div class="neural-node" style="top: 65%; right: 10%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 20%;"></div>
+                <div class="neural-line" style="top: 30%; left: 15%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 70%; right: 15%; width: 35%; transform: rotate(-15deg);"></div>
+            </div>
+            <!-- Domain 41 -->
+            <div class="domain-card">
+                <h3>41. Social Engineering</h3>
+                <p class="domain-concept">Manipulating people to gain access or information.</p>
+                <p class="knowledge-source"><a href="https://www.social-engineer.org/" target="_blank">Social Engineering Framework</a>, SANS Human Factor Resources</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 30%;"></div>
+                <div class="neural-node" style="top: 40%; right: 30%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 40%;"></div>
+                <div class="neural-line" style="top: 15%; left: 35%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 35%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 42 -->
+            <div class="domain-card">
+                <h3>42. Threat Hunting</h3>
+                <p class="domain-concept">Proactively searching for threats that evade existing security measures.</p>
+                <p class="knowledge-source">LinkedIn: Threat Intelligence (implied), <a href="https://www.sans.org/cyber-security-courses/threat-hunting/" target="_blank">SANS FOR519</a>, Hunting Playbooks</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 25%;"></div>
+                <div class="neural-node" style="top: 50%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 35%;"></div>
+                <div class="neural-line" style="top: 25%; left: 30%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 55%; right: 30%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 43 -->
+            <div class="domain-card">
+                <h3>43. Blockchain Security</h3>
+                <p class="domain-concept">Securing blockchain networks and smart contracts.</p>
+                <p class="knowledge-source">Blockchain Security Papers, Smart Contract Auditing Guides, Consensus Mechanism Analyses</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 20%;"></div>
+                <div class="neural-node" style="top: 35%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 30%;"></div>
+                <div class="neural-line" style="top: 20%; left: 25%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 40%; right: 25%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 44 -->
+            <div class="domain-card">
+                <h3>44. Dark Web Monitoring</h3>
+                <p class="domain-concept">Monitoring dark web marketplaces and forums for threats.</p>
+                <p class="knowledge-source">LinkedIn: Dark Web Monitoring (implied), Threat Intelligence Platforms, OSINT Tools</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 15%;"></div>
+                <div class="neural-node" style="top: 60%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 25%;"></div>
+                <div class="neural-line" style="top: 30%; left: 20%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 65%; right: 20%; width: 35%; transform: rotate(-20deg);"></div>
+            </div>
+            <!-- Domain 45 -->
+            <div class="domain-card">
+                <h3>45. Security Training & Certification</h3>
+                <p class="domain-concept">Programs and credentials for cybersecurity professionals.</p>
+                <p class="knowledge-source">LinkedIn: <a href="https://lnkd.in/g4EsFmF6" target="_blank">VAPT Learning Resources</a>, <a href="https://www.sans.org/" target="_blank">SANS Institute</a>, (ISC)², CompTIA, Offensive Security</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 25%;"></div>
+                <div class="neural-node" style="top: 45%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 35%;"></div>
+                <div class="neural-line" style="top: 15%; left: 30%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 50%; right: 30%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 46 -->
+            <div class="domain-card">
+                <h3>46. Security Metrics & Reporting</h3>
+                <p class="domain-concept">Measuring and reporting the effectiveness of security programs.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/blog/measuring-security-program-effectiveness/" target="_blank">SANS Metrics Resources</a>, NIST CSF Metrics, FAIR Model</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 20%;"></div>
+                <div class="neural-node" style="top: 55%; right: 20%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 30%;"></div>
+                <div class="neural-line" style="top: 25%; left: 25%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 60%; right: 25%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+            <!-- Domain 47 -->
+            <div class="domain-card">
+                <h3>47. Password Management</h3>
+                <p class="domain-concept">Strategies and tools for creating and storing strong passwords.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/publications/detail/sp/800-63b/final" target="_blank">NIST SP 800-63B</a>, Password Policy Guides, Password Manager Docs</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 15%; left: 15%;"></div>
+                <div class="neural-node" style="top: 40%; right: 15%;"></div>
+                <div class="neural-node" style="bottom: 15%; left: 25%;"></div>
+                <div class="neural-line" style="top: 20%; left: 20%; width: 25%; transform: rotate(45deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 20%; width: 30%; transform: rotate(-60deg);"></div>
+            </div>
+            <!-- Domain 48 -->
+            <div class="domain-card">
+                <h3>48. Red Team / Blue Team Exercises</h3>
+                <p class="domain-concept">Simulated attacks (Red) and defense (Blue) exercises.</p>
+                <p class="knowledge-source"><a href="https://www.sans.org/cyber-security-courses/advanced-security-architecture-design/" target="_blank">SANS MGT513</a>, <a href="https://caldera.mitre.org/" target="_blank">CALDERA</a> Framework</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 25%; left: 10%;"></div>
+                <div class="neural-node" style="top: 65%; right: 10%;"></div>
+                <div class="neural-node" style="bottom: 25%; left: 20%;"></div>
+                <div class="neural-line" style="top: 30%; left: 15%; width: 20%; transform: rotate(75deg);"></div>
+                <div class="neural-line" style="top: 70%; right: 15%; width: 35%; transform: rotate(-15deg);"></div>
+            </div>
+            <!-- Domain 49 -->
+            <div class="domain-card">
+                <h3>49. Security Automation</h3>
+                <p class="domain-concept">Using technology to automate security tasks.</p>
+                <p class="knowledge-source">LinkedIn: <a href="https://lnkd.in/geeHC98P" target="_blank">AI Agents (AgentKit)</a>, SOAR Platform Docs, Python Security Books</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 10%; left: 30%;"></div>
+                <div class="neural-node" style="top: 40%; right: 30%;"></div>
+                <div class="neural-node" style="bottom: 10%; left: 40%;"></div>
+                <div class="neural-line" style="top: 15%; left: 35%; width: 25%; transform: rotate(30deg);"></div>
+                <div class="neural-line" style="top: 45%; right: 35%; width: 20%; transform: rotate(-45deg);"></div>
+            </div>
+            <!-- Domain 50 -->
+            <div class="domain-card">
+                <h3>50. Quantum Cryptography</h3>
+                <p class="domain-concept">Cryptographic systems based on quantum mechanics.</p>
+                <p class="knowledge-source"><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank">NIST PQC</a>, Quantum Computing Impact Papers</p>
+                <!-- Neural Network Visual Elements -->
+                <div class="neural-node" style="top: 20%; left: 25%;"></div>
+                <div class="neural-node" style="top: 50%; right: 25%;"></div>
+                <div class="neural-node" style="bottom: 20%; left: 35%;"></div>
+                <div class="neural-line" style="top: 25%; left: 30%; width: 30%; transform: rotate(60deg);"></div>
+                <div class="neural-line" style="top: 55%; right: 30%; width: 25%; transform: rotate(-30deg);"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Contribute Synapses: Share your insights to strengthen the network!</p>
+        <p>This conceptual structure is licensed under the MIT License.</p>
+    </div>
+
+</body>
+</html>
